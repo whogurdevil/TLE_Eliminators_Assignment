@@ -8,11 +8,14 @@ app.use(cors());
 app.use(express.json());
 const studentRoutes = require("./routes/studentRoutes");
 const codeforcesRoutes = require("./routes/codeforces");
+const sendReminderEmail = require('./services/sendReminderEmail');
+const fetchAndSyncAllStudents = require('./services/updateCfData').fetchAndSyncAllStudents;
 app.use("/api/codeforces", codeforcesRoutes);
 app.use("/api/students", studentRoutes);
 app.get("/", (req, res) => res.send("API is working"));
 
-// TODO: Add student routes
+
+require("./cron/UpdatedataCron")
 
 const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.MONGO_URI)

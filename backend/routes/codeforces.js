@@ -127,5 +127,25 @@ router.get('/submissions/:handle', async (req, res) => {
   }
 });
 
+router.get('/user/:handle', async (req, res) => {
+  const handle = req.params.handle;
+
+  try {
+    const { data } = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
+    const user = data.result[0];
+
+    const ratingSummary = {
+      currentRating: user.rating || 0,
+      maxRating: user.maxRating || 0,
+    };
+
+    res.json(ratingSummary);
+  } catch (error) {
+    console.error(`Error fetching user info for ${handle}:`, error.message);
+    res.status(500).json({ error: "Failed to fetch user info" });
+  }
+});
+
+
 
 module.exports = router;

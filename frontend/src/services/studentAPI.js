@@ -15,13 +15,21 @@ export const deleteStudent = async (id) => {
 
 export const fetchStudentById = async (id) => {
   const res = await axios.get(`${API_BASE}/students/${id}`);
+  console.log(res)
   return res.data;
 };
 
+
+export const updateStudent = async (id, updatedData) => {
+  const res = await axios.put(`${API_BASE}/students/${id}`, updatedData);
+  return res.data;
+};
+
+
 // === Codeforces Contest History ===
-export const fetchContestHistory = async (handle, days=365) => {
+export const fetchContestHistory = async (stundetId, days=365) => {
   try {
-    const res = await axios.get(`${API_BASE}/codeforces/history/${handle}?days=${days}`);
+    const res = await axios.get(`${API_BASE}/students/contestHistory/${stundetId}?days=${days}`);
     return res.data;
   } catch (error) {
     console.error('Failed to fetch contest history from backend:', error.message);
@@ -34,9 +42,9 @@ export const filterContestsByDays = (contests, days) => {
   return contests.filter(c => now - c.ratingUpdateTimeSeconds <= days * 24 * 3600);
 };
 
-export const fetchRecentSolvedProblems = async (handle, days = 90) => {
+export const fetchRecentSolvedProblems = async (stundetId, days = 90) => {
   try {
-    const res = await axios.get(`${API_BASE}/codeforces/submissions/${handle}?days=${days}`);
+    const res = await axios.get(`${API_BASE}/students/submissions/${stundetId}?days=${days}`);
     return res.data;
   } catch (error) {
     console.error("Failed to fetch solved problems:", error.message);

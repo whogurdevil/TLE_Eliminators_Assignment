@@ -9,7 +9,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-const ContestHistory = ({ handle }) => {
+const ContestHistory = ({ studentId }) => {
   const [contests, setContests] = useState([]);
   const [filteredContests, setFilteredContests] = useState([]);
   const [days, setDays] = useState(365);
@@ -19,7 +19,7 @@ const ContestHistory = ({ handle }) => {
     const loadContestData = async () => {
       setLoading(true);
       try {
-        const data = await fetchContestHistory(handle);
+        const data = await fetchContestHistory(studentId);
         setContests(data);
       } catch (error) {
         console.error("Failed to fetch contest history:", error);
@@ -27,8 +27,8 @@ const ContestHistory = ({ handle }) => {
       setLoading(false);
     };
 
-    if (handle) loadContestData();
-  }, [handle]);
+    if (studentId) loadContestData();
+  }, [studentId]);
 
   useEffect(() => {
     setFilteredContests(filterContestsByDays(contests, days));

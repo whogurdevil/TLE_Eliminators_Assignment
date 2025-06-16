@@ -5,16 +5,16 @@ import { fetchStudentById } from '../services/studentAPI';
 import ContestHistory from '../components/ContestHistory';
 
 const StudentProfilePage = () => {
-  const { id } = useParams();
+  const { studentId } = useParams();
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
     const loadStudent = async () => {
-      const data = await fetchStudentById(id);
+      const data = await fetchStudentById(studentId);
       setStudent(data);
     };
     loadStudent();
-  }, [id]);
+  }, [studentId]);
 
   if (!student) {
     return (
@@ -32,12 +32,12 @@ const StudentProfilePage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Contest History Section */}
         <section className="p-4 rounded-xl h-full flex flex-col">
-          <ContestHistory handle={student.cfHandle} />
+          <ContestHistory studentId={studentId} />
         </section>
 
         {/* Problem Solving Stats Section */}
         <section className="p-4 rounded-xl">
-          <ProblemSolvingData handle={student.cfHandle} />
+          <ProblemSolvingData studentId={studentId} />
         </section>
       </div>
 

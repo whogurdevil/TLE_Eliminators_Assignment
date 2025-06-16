@@ -21,7 +21,7 @@ const buildHeatmapData = (problems) => {
   return result;
 };
 
-const ProblemSolvingData = ({ handle }) => {
+const ProblemSolvingData = ({ studentId }) => {
   const [days, setDays] = useState(90);
   const [allProblems, setAllProblems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,12 +29,12 @@ const ProblemSolvingData = ({ handle }) => {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      const data = await fetchRecentSolvedProblems(handle, 90);
+      const data = await fetchRecentSolvedProblems(studentId, 90);
       setAllProblems(data);
       setLoading(false);
     };
     load();
-  }, [handle]);
+  }, [studentId]);
 
   const now = Date.now() / 1000;
   const filteredProblems = allProblems.filter(

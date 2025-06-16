@@ -1,15 +1,25 @@
 const mongoose = require('mongoose');
 
+const SubmissionSchema = new mongoose.Schema({}, { strict: false });
+const ContestSchema = new mongoose.Schema({}, { strict: false });
+
 const studentSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: String,
-  cfHandle: { type: String, required: true },
+  name: String,
+  email: String,
+  cfHandle: String,
   currentRating: Number,
   maxRating: Number,
+  contestHistory: [ContestSchema],  // ✅ Accepts flexible contest object
+  submissions: [SubmissionSchema],  // ✅ Accepts flexible submission object
   lastSyncedAt: Date,
-  emailRemindersSent: { type: Number, default: 0 },
-  emailReminderDisabled: { type: Boolean, default: false },
-}, { timestamps: true });
+  reminderEmailCount: {
+    type: Number,
+    default: 0
+  },
+  reminderEmailDisabled: {
+    type: Boolean,
+    default: false
+  }
+});
 
 module.exports = mongoose.model('Student', studentSchema);
