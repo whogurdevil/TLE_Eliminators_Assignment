@@ -99,5 +99,33 @@ router.get('/history/:handle', async (req, res) => {
     }
 });
 
+router.get('/submissions/:handle', async (req, res) => {
+
+  const handle = req.params.handle;
+  console.log(`[REQUEST] problems history for: ${handle})`);
+
+  const days = parseInt(req.query.days) || 90;
+  const now = Math.floor(Date.now() / 1000);
+  const cutoff = now - days * 24 * 3600;   
+
+
+  try {
+    const { data } = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}`);
+    const allSubmissions = data.result;
+
+    // Filter accepted submissions within the last `days`
+    const filtered = allSubmissions.filter(sub => 
+      sub.verdict === 'OK' && 
+      sub.creationTimeSeconds >= cutoff && 
+      sub.problem.rating
+    );
+
+    res.json(filtered);
+  } catch (error) {
+    console.error("Error fetching submissions:", error.message);
+    res.status(500).json({ error: "Failed to fetch submissions" });
+  }
+});
+
 
 module.exports = router;

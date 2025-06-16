@@ -24,7 +24,7 @@ export const fetchContestHistory = async (handle, days=365) => {
     const res = await axios.get(`${API_BASE}/codeforces/history/${handle}?days=${days}`);
     return res.data;
   } catch (error) {
-    console.error('❌ Failed to fetch contest history from backend:', error.message);
+    console.error('Failed to fetch contest history from backend:', error.message);
     return [];
   }
 };
@@ -32,4 +32,14 @@ export const fetchContestHistory = async (handle, days=365) => {
 export const filterContestsByDays = (contests, days) => {
   const now = Date.now() / 1000;
   return contests.filter(c => now - c.ratingUpdateTimeSeconds <= days * 24 * 3600);
+};
+
+export const fetchRecentSolvedProblems = async (handle, days = 90) => {
+  try {
+    const res = await axios.get(`${API_BASE}/codeforces/submissions/${handle}?days=${days}`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch solved problems:", error.message);
+    return [];
+  }
 };

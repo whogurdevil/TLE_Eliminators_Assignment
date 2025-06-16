@@ -11,7 +11,6 @@ const StudentProfilePage = () => {
   useEffect(() => {
     const loadStudent = async () => {
       const data = await fetchStudentById(id);
-      console.log(data, "student")
       setStudent(data);
     };
     loadStudent();
@@ -30,18 +29,18 @@ const StudentProfilePage = () => {
       <h2 className="text-2xl font-bold mb-6">{student.name}'s Profile</h2>
 
       {/* Responsive grid container */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Contest History Section */}
-        <section className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h3 className="text-xl font-semibold mb-2">📊 Contest History</h3>
+        <section className="p-4 rounded-xl h-full flex flex-col">
           <ContestHistory handle={student.cfHandle} />
         </section>
 
-        <section className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h3 className="text-xl font-semibold mb-2">🧠 Problem Solving Stats</h3>
-          <ProblemSolvingData stats={student.cfHandle} />
-        </section> 
+        {/* Problem Solving Stats Section */}
+        <section className="p-4 rounded-xl">
+          <ProblemSolvingData handle={student.cfHandle} />
+        </section>
       </div>
+
     </div>
   );
 };
