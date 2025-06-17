@@ -25,6 +25,20 @@ const ProblemSolvingData = ({ studentId }) => {
   const [days, setDays] = useState(90);
   const [allProblems, setAllProblems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [chartHeight, setChartHeight] = useState(getResponsiveHeight());
+
+  function getResponsiveHeight() {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 640 ? 220 : 300;
+    }
+    return 300;
+  }
+
+  useEffect(() => {
+    const handleResize = () => setChartHeight(getResponsiveHeight());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const load = async () => {
@@ -63,8 +77,10 @@ const ProblemSolvingData = ({ studentId }) => {
   return (
     <div className="flex flex-col gap-6 w-full">
       {/* 📊 Problem Stats Card */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-300 w-full">
-        <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Problem Solving Data</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6 transition-colors duration-300 w-full">
+        <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white">
+          Problem Solving Data
+        </h2>
 
         {/* Filter Buttons */}
         <div className="mb-6 flex flex-wrap gap-3">
@@ -73,7 +89,7 @@ const ProblemSolvingData = ({ studentId }) => {
               key={d}
               onClick={() => setDays(d)}
               disabled={loading}
-              className={`px-4 py-1.5 rounded-md border text-sm transition-colors duration-200 ${
+              className={`px-3 py-1.5 rounded-md border text-sm transition-colors duration-200 ${
                 d === days
                   ? 'bg-blue-600 text-white border-blue-600'
                   : 'bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-neutral-700 hover:bg-gray-200 dark:hover:bg-neutral-700'
@@ -92,7 +108,7 @@ const ProblemSolvingData = ({ studentId }) => {
         ) : (
           <>
             {/* Stat Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-gray-800 dark:text-gray-200 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-gray-800 dark:text-gray-200 text-sm">
               <div><b>Total Solved:</b> {totalSolved}</div>
               <div><b>Average Rating:</b> {avgRating}</div>
               <div><b>Avg/Day:</b> {avgPerDay}</div>
@@ -104,8 +120,8 @@ const ProblemSolvingData = ({ studentId }) => {
 
             {/* 📉 Rating-wise Chart */}
             {totalSolved > 0 && (
-              <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={chartData} margin={{ top: 40, right: 30, left: 0, bottom: 0 }}>
+              <ResponsiveContainer width="100%" height={chartHeight}>
+                <BarChart data={chartData} margin={{ top: 40, right: 30, left: -10, bottom: 0 }}>
                   <text
                     x="50%"
                     y={20}
@@ -124,7 +140,7 @@ const ProblemSolvingData = ({ studentId }) => {
                       color: 'white',
                     }}
                   />
-                  <Bar dataKey="count" fill="#38bdf8"/>
+                  <Bar dataKey="count" fill="#38bdf8" />
                 </BarChart>
               </ResponsiveContainer>
             )}
@@ -134,8 +150,11 @@ const ProblemSolvingData = ({ studentId }) => {
 
       {/* 🔥 Submission Heatmap */}
       {!loading && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-300 w-full">
+        
+        <div className="bg-white p-8 md:p h-54 md:h-full dark:bg-gray-800 rounded-xl shadow-md sm:p-6 transition-colors duration-300">
+          <ResponsiveContainer >
           <SubmissionHeatmap data={heatmapData} />
+          </ResponsiveContainer>
         </div>
       )}
     </div>

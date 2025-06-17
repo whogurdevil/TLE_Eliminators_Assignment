@@ -5,7 +5,7 @@ import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 const SubmissionHeatmap = ({ data }) => {
   return (
-    <div className="scale-70">
+    <div className="scale-90 md:scale-80">
       <CalendarHeatmap
         startDate={new Date(new Date().setDate(new Date().getDate() - 89))}
         endDate={new Date()}

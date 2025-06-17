@@ -1,7 +1,7 @@
 // services/studentAPI.js
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'http://192.168.1.35:5000/api';
 
 // === Student APIs ===
 export const fetchStudents = async () => {

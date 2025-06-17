@@ -18,16 +18,19 @@ const StudentProfilePage = () => {
 
   if (!student) {
     return (
-      <div className="p-6 text-center text-gray-500 dark:text-gray-300">
+      <div className="p-4 sm:p-6 text-center text-gray-500 dark:text-gray-300">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen p-6 text-gray-900 dark:text-gray-100">
-      <h2 className="text-2xl font-bold mb-6">{student.name}'s Profile</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen px-4 py-4 sm:px-6 sm:py-6 text-gray-900 dark:text-gray-100">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center sm:text-left">
+        {student.name}'s Profile
+      </h2>
+
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
         <section className="rounded-xl h-full flex flex-col">
           <ContestHistory studentId={studentId} />
         </section>
@@ -36,7 +39,6 @@ const StudentProfilePage = () => {
           <ProblemSolvingData studentId={studentId} />
         </section>
       </div>
-
     </div>
   );
 };

@@ -65,13 +65,14 @@ const ContestHistory = ({ studentId }) => {
       ) : (
         <>
           {/* Line Chart */}
-          <ResponsiveContainer width="100%" height={300}>
+          <div className='h-40 md:h-96'>
+          <ResponsiveContainer width="100%">
             <LineChart
               data={filteredContests.map((c) => ({
                 date: formatDate(c.ratingUpdateTimeSeconds),
                 rating: c.newRating,
               }))}
-              margin={{ top: 20, right: 30, bottom: 0, left: 0 }}
+              margin={{ top: 0, right: 50, bottom: 0, left: -10 }}
             >
               <XAxis dataKey="date" stroke="#8884d8" />
               <YAxis stroke="#8884d8" />
@@ -84,9 +85,10 @@ const ContestHistory = ({ studentId }) => {
               />
             </LineChart>
           </ResponsiveContainer>
+          </div>
 
           {/* Scrollable Contest List */}
-          <div className="mt-6 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+          <div className="mt-6 max-h-[200px] md:max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
             <ul className="space-y-4">
               {filteredContests.map((contest, index) => {
                 const ratingDiff = contest.newRating - contest.oldRating;

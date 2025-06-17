@@ -21,7 +21,7 @@ const useTheme = () => {
 
     const timer = setTimeout(() => {
       body.classList.remove('clip-reveal');
-    }, 600); // match animation duration
+    }, 600);
 
     return () => clearTimeout(timer);
   }, [theme]);

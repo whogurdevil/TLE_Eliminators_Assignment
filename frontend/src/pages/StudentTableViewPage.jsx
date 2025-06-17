@@ -70,11 +70,13 @@ const StudentTableView = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh)] bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 p-4">
-      <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
-        <h1 className="text-2xl font-bold">All enrolled students</h1>
+    <div className="w-full h-max py-6 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-2 md:px-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center flex-wrap gap-4 mb-6">
+        <h1 className="text-xl md:text-2xl font-bold text-center sm:text-left">
+          All enrolled students
+        </h1>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-row flex-wrap gap-2 justify-center sm:justify-end">
           <button
             className="bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-300"
             onClick={async () => {
@@ -85,7 +87,6 @@ const StudentTableView = () => {
                   `Enter new cron schedule (e.g., */30 * * * * for every 30 mins): \nCurrent schedule: ${current.currentSchedule}`,
                   current.currentSchedule
                 );
-
                 if (newSchedule && newSchedule !== current.currentSchedule) {
                   await updateCronSchedule(newSchedule);
                   alert('Cron schedule updated successfully.');
@@ -96,27 +97,29 @@ const StudentTableView = () => {
               }
             }}
           >
-            Change Cron Time
+            Edit Cron Time
           </button>
 
           <button
             className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-300"
             onClick={() => navigate('/student/new')}
           >
-            Add New Student
+            Add Student
           </button>
 
           <button
             className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-medium px-4 py-2 rounded-lg shadow-md transition-all duration-300"
             onClick={() => exportToCsv(students)}
           >
-            Download CSV
+            Get CSV
           </button>
         </div>
       </div>
 
+
+
       <div className="w-full overflow-x-auto">
-        <table className="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700">
+        <table className="min-w-[800px] w-full table-auto border-collapse border border-gray-300 dark:border-gray-700 text-sm">
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-800">
               {[
@@ -126,7 +129,7 @@ const StudentTableView = () => {
               ].map((header) => (
                 <th
                   key={header}
-                  className="border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm text-left"
+                  className="border px-4 py-2 text-center"
                 >
                   {header}
                 </th>
@@ -141,39 +144,32 @@ const StudentTableView = () => {
                   className="text-center even:bg-gray-50 dark:even:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                   onClick={() => handleView(student._id)}
                 >
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.name}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.email}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.phone || 'N/A'}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.cfHandle}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.currentRating ?? '—'}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.maxRating ?? '—'}</td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
+                  <td className="border px-4 py-2">{student.name}</td>
+                  <td className="border px-4 py-2">{student.email}</td>
+                  <td className="border px-4 py-2">{student.phone || 'N/A'}</td>
+                  <td className="border px-4 py-2">{student.cfHandle}</td>
+                  <td className="border px-4 py-2">{student.currentRating ?? '—'}</td>
+                  <td className="border px-4 py-2">{student.maxRating ?? '—'}</td>
+                  <td className="border px-4 py-2">
                     {student.lastSyncedAt ? new Date(student.lastSyncedAt).toLocaleString() : '—'}
                   </td>
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">{student.reminderEmailCount ?? '—'}</td>
-
-                  <td className="border border-gray-300 dark:border-gray-700 px-4 py-2">
-
-                      <label className="relative inline-flex items-center cursor-pointer" onClick={(e) => e.stopPropagation()}>
-                        <input
-                          type="checkbox"
-                          checked={!student.reminderEmailDisabled}
+                  <td className="border px-4 py-2">{student.reminderEmailCount ?? '—'}</td>
+                  <td className="border px-4 py-2" onClick={(e) => e.stopPropagation()}>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={!student.reminderEmailDisabled}
                         onChange={(e) => {
                           e.stopPropagation();
                           handleToggleReminder(student._id, student.reminderEmailDisabled);
                         }}
-                          className="sr-only peer"
-                        />
-                        <div className="w-10 h-6 bg-gray-300 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer-checked:bg-blue-600 transition-all duration-300" />
-                        <span className="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-200 rounded-full transition-all duration-300 peer-checked:translate-x-full" />
-                      </label>
-
+                        className="sr-only peer"
+                      />
+                      <div className="w-10 h-6 bg-gray-300 dark:bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer-checked:bg-blue-600 transition-all duration-300" />
+                      <span className="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-200 rounded-full transition-all duration-300 peer-checked:translate-x-full" />
+                    </label>
                   </td>
-
-                  <td
-                    className="border border-gray-300 dark:border-gray-700 px-4 py-2"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <td className="border px-4 py-2" onClick={(e) => e.stopPropagation()}>
                     <div className="flex justify-center items-center gap-2">
                       <button
                         title="Codeforces Info"
@@ -215,6 +211,7 @@ const StudentTableView = () => {
       </div>
     </div>
   );
+
 };
 
 export default StudentTableView;

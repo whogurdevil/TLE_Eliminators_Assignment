@@ -68,7 +68,7 @@ const StudentEdit = () => {
   if (!student) return <p className="p-4 text-gray-800 dark:text-gray-100">No student found.</p>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-4">
+    <div className="min-h-screen px-4 py-8 flex items-start justify-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <form
         onSubmit={handleSubmit}
         className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 w-full max-w-xl"
