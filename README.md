@@ -1,5 +1,8 @@
 # TLE Eliminators - Asssignment for Full Stack Web Developer 
 
+## Video Link 
+[https://drive.google.com/file/d/1BPQke0wqaraY1A__GEHGMYxPMJhuevg8/view?usp=drivesdk](https://drive.google.com/file/d/1BPQke0wqaraY1A__GEHGMYxPMJhuevg8/view?usp=drivesdk)
+
 ## Objectives
 - [x] Student Table View Page
   - [x] table listing all enrolled students
