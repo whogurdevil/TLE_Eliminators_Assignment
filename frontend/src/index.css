@@ -29,15 +29,15 @@
 }
 
 .color-empty {
-  fill: #e5e7eb; /* Tailwind's gray-200 */
+  fill: #e5e7eb; 
 }
 .color-scale-2 {
-  fill: #60a5fa; /* Tailwind's blue-400 */
+  fill: #60a5fa; 
 }
 .color-scale-3 {
-  fill: #3b82f6; /* Tailwind's blue-500 */
+  fill: #3b82f6; 
 }
 .color-scale-4 {
-  fill: #1d4ed8; /* Tailwind's blue-700 */
+  fill: #1d4ed8; 
 }
 

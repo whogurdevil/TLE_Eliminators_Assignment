@@ -45,10 +45,10 @@ const StudentTableView = () => {
 
   const handleToggleReminder = async (id, currentStatus) => {
     try {
-      await toggleEmailReminder(id, !currentStatus);
+      await toggleEmailReminder(id, currentStatus);
       setStudents((prev) =>
         prev.map((s) =>
-          s._id === id ? { ...s, reminderEmailDisabled: !currentStatus } : s
+          s._id === id ? { ...s, reminderEmailDisabled: currentStatus } : s
         )
       );
     } catch (error) {
@@ -161,7 +161,7 @@ const StudentTableView = () => {
                         checked={!student.reminderEmailDisabled}
                         onChange={(e) => {
                           e.stopPropagation();
-                          handleToggleReminder(student._id, student.reminderEmailDisabled);
+                          handleToggleReminder(student._id, !student.reminderEmailDisabled);
                         }}
                         className="sr-only peer"
                       />

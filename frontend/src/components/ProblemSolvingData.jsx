@@ -76,13 +76,11 @@ const ProblemSolvingData = ({ studentId }) => {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      {/* 📊 Problem Stats Card */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6 transition-colors duration-300 w-full">
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white">
           Problem Solving Data
         </h2>
 
-        {/* Filter Buttons */}
         <div className="mb-6 flex flex-wrap gap-3">
           {[7, 30, 90].map((d) => (
             <button
@@ -100,14 +98,12 @@ const ProblemSolvingData = ({ studentId }) => {
           ))}
         </div>
 
-        {/* Loading Spinner */}
         {loading ? (
           <div className="flex justify-center items-center h-48">
             <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
           </div>
         ) : (
           <>
-            {/* Stat Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-gray-800 dark:text-gray-200 text-sm">
               <div><b>Total Solved:</b> {totalSolved}</div>
               <div><b>Average Rating:</b> {avgRating}</div>
@@ -118,7 +114,6 @@ const ProblemSolvingData = ({ studentId }) => {
               </div>
             </div>
 
-            {/* 📉 Rating-wise Chart */}
             {totalSolved > 0 && (
               <ResponsiveContainer width="100%" height={chartHeight}>
                 <BarChart data={chartData} margin={{ top: 40, right: 30, left: -10, bottom: 0 }}>
@@ -148,7 +143,6 @@ const ProblemSolvingData = ({ studentId }) => {
         )}
       </div>
 
-      {/* 🔥 Submission Heatmap */}
       {!loading && (
         
         <div className="bg-white p-8 md:p h-54 md:h-full dark:bg-gray-800 rounded-xl shadow-md sm:p-6 transition-colors duration-300">

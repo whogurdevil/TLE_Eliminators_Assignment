@@ -27,8 +27,6 @@ const studentSchema = new mongoose.Schema({
   },
   currentRating: Number,
   maxRating: Number,
-  contestHistory: [ContestSchema],  
-  submissions: [SubmissionSchema],  
   lastSyncedAt: Date,
   reminderEmailCount: {
     type: Number,
@@ -37,7 +35,9 @@ const studentSchema = new mongoose.Schema({
   reminderEmailDisabled: {
     type: Boolean,
     default: false
-  }
+  },
+  contestHistory: [ContestSchema],  
+  submissions: [SubmissionSchema]
 });
 
 module.exports = mongoose.model('Student', studentSchema);

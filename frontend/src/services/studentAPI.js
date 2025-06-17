@@ -1,9 +1,7 @@
-// services/studentAPI.js
 import axios from 'axios';
 
 const API_BASE = 'http://192.168.1.35:5000/api';
 
-// === Student APIs ===
 export const fetchStudents = async () => {
   const res = await axios.get(`${API_BASE}/students`);
   return res.data;
@@ -32,7 +30,6 @@ export const addStudent = async (newStudentData) => {
 
 
 
-// === Codeforces Contest History ===
 export const fetchContestHistory = async (stundetId, days=365) => {
   try {
     const res = await axios.get(`${API_BASE}/students/contestHistory/${stundetId}?days=${days}`);
@@ -72,7 +69,6 @@ export const toggleEmailReminder = async (studentId, value) => {
 
 
 
-// === Cron APIs ===
 export const updateCronSchedule = async (newSchedule) => {
   try {
     const res = await axios.post(`${API_BASE}/cron/update-cron`, {

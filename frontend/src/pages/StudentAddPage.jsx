@@ -29,9 +29,10 @@ const StudentAddPage = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? !checked : value
     }));
   };
 
@@ -58,7 +59,6 @@ const StudentAddPage = () => {
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Add New Student</h2>
 
-        {/* Name */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Name</label>
           <input
@@ -72,7 +72,6 @@ const StudentAddPage = () => {
           />
         </div>
 
-        {/* Email */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Email</label>
           <input
@@ -86,7 +85,6 @@ const StudentAddPage = () => {
           />
         </div>
 
-        {/* Phone */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Phone</label>
           <input
@@ -100,7 +98,6 @@ const StudentAddPage = () => {
           />
         </div>
 
-        {/* CF Handle */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Codeforces Handle</label>
           <input
@@ -114,7 +111,6 @@ const StudentAddPage = () => {
           />
         </div>
 
-        {/* Reminder Emails */}
         <div className="mb-6">
           <label className="block text-sm font-medium mb-2">Receive Reminder Emails</label>
           <label className="relative inline-flex items-center cursor-pointer">
@@ -122,7 +118,7 @@ const StudentAddPage = () => {
               disabled={isSubmitting}
               type="checkbox"
               name="reminderEmailDisabled"
-              checked={formData.reminderEmailDisabled}
+              checked={!formData.reminderEmailDisabled}
               onChange={handleChange}
               className="sr-only peer"
             />
@@ -131,7 +127,6 @@ const StudentAddPage = () => {
           </label>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}

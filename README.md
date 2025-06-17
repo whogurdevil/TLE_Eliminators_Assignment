@@ -26,8 +26,8 @@
   - [x] Show email sent number in main table 
   - [x] Option to disable the automatic email for individual students.
 - [ ] Bonus
-  - [ ] UI is mobile and tablet responsive.
-  - [ ] Have both light and dark mode with a toggle option.
+  - [x] UI is mobile and tablet responsive.
+  - [x] Have both light and dark mode with a toggle option.
   - [ ] Code is well documented.
 
 

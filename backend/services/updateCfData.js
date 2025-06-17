@@ -2,9 +2,8 @@ const axios = require('axios');
 const sendReminderEmail = require('../services/sendReminderEmail');
 const Student = require('../models/Student')
 
-const BASE_URL = 'http://localhost:5000/api'; // Use environment variable if possible
+const BASE_URL = 'http://localhost:5000/api'; 
 
-// Sync all students in the DB
 const fetchAndSyncStudent = async (cfHandle, studentId) => {
   if (!cfHandle || !studentId) {
     console.warn('Missing cfHandle or studentId');
@@ -25,7 +24,6 @@ const fetchAndSyncStudent = async (cfHandle, studentId) => {
     };
 
     const updated = await Student.findByIdAndUpdate(studentId, payload, { new: true });
-    // ⏳ Inactivity detection
     const last7Days = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60;
     const recentSubmissions = submissions.filter(
       (s) => s.creationTimeSeconds >= last7Days

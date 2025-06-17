@@ -7,9 +7,7 @@ const CodeforcesModal = ({ student, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
       <div className="w-[90%] max-w-3xl bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-800 shadow-lg rounded-2xl relative">
-        {/* Inner Content */}
         <div className="p-6">
-          {/* Close Button */}
           <button
             className="absolute top-3 right-3 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-red-500 text-xl transition"
             onClick={onClose}
@@ -17,11 +15,9 @@ const CodeforcesModal = ({ student, onClose }) => {
             ✖
           </button>
 
-          {/* Title */}
           <h2 className="text-xl font-bold py-2 text-gray-800 dark:text-gray-200 text-center">Codeforces Info</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-4">Student's coding profile details</p>
 
-          {/* Basic Info in 2 columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-gray-700 dark:text-gray-300 mb-6">
             <p><strong>Name:</strong> {student.name}</p>
             <p><strong>Current Rating:</strong> {student.currentRating ?? 'N/A'}</p>
@@ -29,9 +25,7 @@ const CodeforcesModal = ({ student, onClose }) => {
             <p><strong>Max Rating:</strong> {student.maxRating ?? 'N/A'}</p>
           </div>
 
-          {/* Contests and Submissions in 2-column layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto custom-scrollbar mb-6">
-  {/* Recent Contests */}
             <div>
               <h3 className="text-md font-semibold mb-2 text-gray-800 dark:text-gray-200">Recent Contests</h3>
               {recentContests.length > 0 ? (
@@ -48,7 +42,6 @@ const CodeforcesModal = ({ student, onClose }) => {
               )}
             </div>
 
-            {/* Recent Submissions */}
             <div>
               <h3 className="text-md font-semibold mb-2 text-gray-800 dark:text-gray-200">Recent Submissions</h3>
               {recentSubmissions.length > 0 ? (
@@ -68,7 +61,6 @@ const CodeforcesModal = ({ student, onClose }) => {
             </div>
           </div>
 
-          {/* Close Button */}
           <div className="text-center">
             <button
               onClick={onClose}

@@ -38,7 +38,7 @@ function getSolvedProblemsInContest(submissions, contestId) {
 
 router.get('/history/:handle', async (req, res) => {
     const handle = req.params.handle;
-    const days = parseInt(req.query.days) || 360; // default to 360 days if not specified
+    const days = parseInt(req.query.days) || 360; 
     console.log(`[REQUEST] Contest history for: ${handle} (last ${days} days)`);
 
     try {

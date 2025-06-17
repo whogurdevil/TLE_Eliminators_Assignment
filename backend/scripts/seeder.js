@@ -1,4 +1,3 @@
-// backend/scripts/seeder.js
 const mongoose = require("mongoose");
 require("dotenv").config();
 const Student = require("../models/Student");
