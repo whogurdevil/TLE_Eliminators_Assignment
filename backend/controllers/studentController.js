@@ -1,5 +1,5 @@
 const Student = require('../models/Student');
-const { fetchAndSyncAllStudents } = require('../services/updateCfData');
+const { fetchAndSyncStudent } = require('../services/updateCfData');
 
 exports.getStudents = async (req, res) => {
   const students = await Student.find().sort({ createdAt: -1 });
@@ -8,13 +8,19 @@ exports.getStudents = async (req, res) => {
 
 exports.addStudent = async (req, res) => {
   const newStudent = new Student(req.body);
-  await newStudent.save();
-  res.status(201).json(newStudent);
+  const addedStudent = await newStudent.save();
+  if (addedStudent.id && addedStudent.cfHandle) {
+    await fetchAndSyncStudent(addedStudent.cfHandle, addedStudent.id)
+  }
+  res.status(201).json(addedStudent);
 };
 
 exports.updateStudent = async (req, res) => {
   const { id } = req.params;
   const updated = await Student.findByIdAndUpdate(id, req.body, { new: true });
+  if (updated.id && updated.cfHandle) {
+    await fetchAndSyncStudent(updated.cfHandle, updated.id)
+  }
   res.json(updated);
 };
 

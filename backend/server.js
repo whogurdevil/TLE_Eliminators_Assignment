@@ -13,6 +13,10 @@ const fetchAndSyncAllStudents = require('./services/updateCfData').fetchAndSyncA
 app.use("/api/codeforces", codeforcesRoutes);
 app.use("/api/students", studentRoutes);
 app.get("/", (req, res) => res.send("API is working"));
+const cronRoutes = require('./routes/cronRoutes');
+app.use('/api/cron', cronRoutes);
+
+// app.post('/update', fetchAndSyncAllStudents)
 
 
 require("./cron/UpdatedataCron")

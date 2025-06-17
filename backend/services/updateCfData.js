@@ -1,12 +1,11 @@
 const axios = require('axios');
-const sendReminderEmail = require('../services/sendReminderEmail'); 
+const sendReminderEmail = require('../services/sendReminderEmail');
 const Student = require('../models/Student')
 
 const BASE_URL = 'http://localhost:5000/api'; // Use environment variable if possible
 
 // Sync all students in the DB
 const fetchAndSyncStudent = async (cfHandle, studentId) => {
-  const sent = await sendReminderEmail('gur13dev@gmail.com', 'gurdev');
   if (!cfHandle || !studentId) {
     console.warn('Missing cfHandle or studentId');
     return;
@@ -25,8 +24,7 @@ const fetchAndSyncStudent = async (cfHandle, studentId) => {
       lastSyncedAt: new Date()
     };
 
-    await axios.put(`${BASE_URL}/students/${studentId}`, payload);
-
+    const updated = await Student.findByIdAndUpdate(studentId, payload, { new: true });
     // ⏳ Inactivity detection
     const last7Days = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60;
     const recentSubmissions = submissions.filter(
@@ -44,9 +42,9 @@ const fetchAndSyncStudent = async (cfHandle, studentId) => {
       }
     }
 
-    console.log(`✅ Synced and checked inactivity for ${cfHandle}`);
+    console.log(`Synced and checked inactivity for ${cfHandle}`);
   } catch (err) {
-    console.error(`❌ Failed to sync student ${cfHandle}: ${err.message}`);
+    console.error(`Failed to sync student ${cfHandle}: ${err.message}`);
   }
 };
 

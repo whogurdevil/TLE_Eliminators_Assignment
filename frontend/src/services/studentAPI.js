@@ -15,7 +15,6 @@ export const deleteStudent = async (id) => {
 
 export const fetchStudentById = async (id) => {
   const res = await axios.get(`${API_BASE}/students/${id}`);
-  console.log(res)
   return res.data;
 };
 
@@ -24,6 +23,13 @@ export const updateStudent = async (id, updatedData) => {
   const res = await axios.put(`${API_BASE}/students/${id}`, updatedData);
   return res.data;
 };
+
+export const addStudent = async (newStudentData) => {
+  const res = await axios.post(`${API_BASE}/students`, newStudentData);
+  return res.data;
+};
+
+
 
 
 // === Codeforces Contest History ===
@@ -65,3 +71,26 @@ export const toggleEmailReminder = async (studentId, value) => {
 };
 
 
+
+// === Cron APIs ===
+export const updateCronSchedule = async (newSchedule) => {
+  try {
+    const res = await axios.post(`${API_BASE}/cron/update-cron`, {
+      newSchedule,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Failed to update cron schedule:", error.message);
+    throw error;
+  }
+};
+
+export const fetchCurrentCronSchedule = async () => {
+  try {
+    const res = await axios.get(`${API_BASE}/cron/current-cron`);
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch current cron schedule:", error.message);
+    return { currentSchedule: 'unknown' };
+  }
+};

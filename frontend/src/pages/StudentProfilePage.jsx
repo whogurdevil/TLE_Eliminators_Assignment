@@ -27,16 +27,12 @@ const StudentProfilePage = () => {
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen p-6 text-gray-900 dark:text-gray-100">
       <h2 className="text-2xl font-bold mb-6">{student.name}'s Profile</h2>
-
-      {/* Responsive grid container */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* Contest History Section */}
-        <section className="p-4 rounded-xl h-full flex flex-col">
+        <section className="rounded-xl h-full flex flex-col">
           <ContestHistory studentId={studentId} />
         </section>
 
-        {/* Problem Solving Stats Section */}
-        <section className="p-4 rounded-xl">
+        <section className="rounded-xl">
           <ProblemSolvingData studentId={studentId} />
         </section>
       </div>

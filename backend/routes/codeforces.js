@@ -119,6 +119,8 @@ router.get('/submissions/:handle', async (req, res) => {
       sub.creationTimeSeconds >= cutoff && 
       sub.problem.rating
     );
+    
+    console.log(`[SUCCESS] Fetched  problems for ${handle}`);
 
     res.json(filtered);
   } catch (error) {
@@ -129,6 +131,7 @@ router.get('/submissions/:handle', async (req, res) => {
 
 router.get('/user/:handle', async (req, res) => {
   const handle = req.params.handle;
+  console.log(`[REQUEST] user rating for: ${handle})`);
 
   try {
     const { data } = await axios.get(`https://codeforces.com/api/user.info?handles=${handle}`);
@@ -139,6 +142,7 @@ router.get('/user/:handle', async (req, res) => {
       maxRating: user.maxRating || 0,
     };
 
+    console.log(`[SUCCESS] Fetched ratings for ${handle}`);
     res.json(ratingSummary);
   } catch (error) {
     console.error(`Error fetching user info for ${handle}:`, error.message);
