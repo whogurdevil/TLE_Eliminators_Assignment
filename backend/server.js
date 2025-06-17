@@ -6,10 +6,9 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 const studentRoutes = require("./routes/studentRoutes");
 const codeforcesRoutes = require("./routes/codeforces");
-const sendReminderEmail = require('./services/sendReminderEmail');
-const fetchAndSyncAllStudents = require('./services/updateCfData').fetchAndSyncAllStudents;
 app.use("/api/codeforces", codeforcesRoutes);
 app.use("/api/students", studentRoutes);
 app.get("/", (req, res) => res.send("API is working"));
