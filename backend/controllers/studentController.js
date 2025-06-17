@@ -97,6 +97,7 @@ exports.getStudentContestHistory = async (req, res) => {
 };
 
 exports.toggleReminderEmails = async (req, res) => {
+  console.log("in email")
   const { studentId } = req.params;
   const { disable } = req.body;
 

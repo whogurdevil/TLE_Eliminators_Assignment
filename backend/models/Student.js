@@ -9,8 +9,8 @@ const studentSchema = new mongoose.Schema({
   cfHandle: String,
   currentRating: Number,
   maxRating: Number,
-  contestHistory: [ContestSchema],  // ✅ Accepts flexible contest object
-  submissions: [SubmissionSchema],  // ✅ Accepts flexible submission object
+  contestHistory: [ContestSchema],  
+  submissions: [SubmissionSchema],  
   lastSyncedAt: Date,
   reminderEmailCount: {
     type: Number,

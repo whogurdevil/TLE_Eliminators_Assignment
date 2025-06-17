@@ -51,3 +51,17 @@ export const fetchRecentSolvedProblems = async (stundetId, days = 90) => {
     return [];
   }
 };
+
+export const toggleEmailReminder = async (studentId, value) => {
+  try {
+    const res = await axios.patch(`${API_BASE}/students/toggleReminder/${studentId}`, {
+      disable: value,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Failed to toggle email reminder:", error.message);
+    throw error;
+  }
+};
+
+
